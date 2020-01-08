@@ -1,0 +1,110 @@
+{
+ "application": "book-service",
+ "expectedArtifacts": [
+  {
+   "defaultArtifact": {
+    "artifactAccount": "docker-registry",
+    "id": "625a1c1e-68a6-4339-9c80-4a011db61434",
+    "name": "harbor.lab.winterfell.live/book-service/book-service",
+    "reference": "harbor.lab.winterfell.live/book-service/book-service:latest",
+    "type": "docker/image",
+    "version": "latest"
+   },
+   "displayName": "book-service-image",
+   "id": "1ffaacdf-4b92-4168-93f1-1e3b3222ca81",
+   "matchArtifact": {
+    "artifactAccount": "docker-registry",
+    "id": "5861166a-6ab5-4545-95bf-46039307a10d",
+    "name": "harbor.lab.winterfell.live/book-service/book-service",
+    "type": "docker/image"
+   },
+   "useDefaultArtifact": true,
+   "usePriorArtifact": false
+  }
+ ],
+ "id": "c7d9266e-bb48-43da-906a-4fbc9e3e3b16",
+ "index": 0,
+ "keepWaitingPipelines": false,
+ "lastModifiedBy": "anonymous",
+ "limitConcurrent": true,
+ "name": "Deliver",
+ "stages": [
+  {
+   "account": "riverrun",
+   "cloudProvider": "kubernetes",
+   "manifests": [
+    {
+     "apiVersion": "extensions/v1beta1",
+     "kind": "Deployment",
+     "metadata": {
+      "name": "book-service",
+      "namespace": "book-service"
+     },
+     "spec": {
+      "progressDeadlineSeconds": 600,
+      "replicas": 1,
+      "revisionHistoryLimit": 10,
+      "selector": {
+       "matchLabels": {
+        "run": "book-service"
+       }
+      },
+      "template": {
+       "metadata": {
+        "labels": {
+         "run": "book-service"
+        }
+       },
+       "spec": {
+        "containers": [
+         {
+          "image": "harbor.lab.winterfell.live/book-service/book-service",
+          "name": "book-service"
+         }
+        ]
+       }
+      }
+     }
+    }
+   ],
+   "moniker": {
+    "app": "book-service"
+   },
+   "name": "Deploy (Manifest)",
+   "refId": "1",
+   "requiredArtifactIds": [
+    "1ffaacdf-4b92-4168-93f1-1e3b3222ca81"
+   ],
+   "requiredArtifacts": [],
+   "requisiteStageRefIds": [],
+   "skipExpressionEvaluation": false,
+   "source": "text",
+   "trafficManagement": {
+    "enabled": true,
+    "options": {
+     "enableTraffic": true,
+     "namespace": "book-service",
+     "services": [
+      "service book-service"
+     ],
+     "strategy": "redblack"
+    }
+   },
+   "type": "deployManifest"
+  }
+ ],
+ "triggers": [
+  {
+   "account": "harbor",
+   "enabled": true,
+   "expectedArtifactIds": [
+    "1ffaacdf-4b92-4168-93f1-1e3b3222ca81"
+   ],
+   "organization": "book-service",
+   "registry": "harbor.lab.winterfell.live",
+   "repository": "book-service/book-service",
+   "type": "docker"
+  }
+ ],
+ "updateTs": "1578505743000"
+}

@@ -1,20 +1,22 @@
 {
-  "accounts": "riverrun,casterlyrock",
-  "cloudProviders": "kubernetes",
-  "createTs": "1566645330255",
-  "dataSources": {
-    "disabled": [],
-    "enabled": [
-      "canaryConfigs"
-    ]
-  },
-  "email": "dpfeffer@vmware.com",
-  "enableRerunActiveExecutions": false,
-  "enableRestartRunningExecutions": false,
-  "instancePort": 80,
-  "lastModifiedBy": "anonymous",
-  "name": "book-service",
-  "repoProjectKey": "doddatpivotal",
-  "repoSlug": "book-service",
-  "repoType": "github"
+ "accounts": "riverrun",
+ "cloudProviders": "kubernetes",
+ "createTs": "1566645330255",
+ "dataSources": {
+  "disabled": [],
+  "enabled": [
+   "canaryConfigs"
+  ]
+ },
+ "email": "dpfeffer@vmware.com",
+ "enableRerunActiveExecutions": false,
+ "enableRestartRunningExecutions": false,
+ "instancePort": 80,
+ "lastModifiedBy": "anonymous",
+ "name": "book-service",
+ "repoProjectKey": "doddatpivotal",
+ "repoSlug": "book-service",
+ "repoType": "github",
+ "trafficGuards": [],
+ "updateTs": "1578455661000"
 }
