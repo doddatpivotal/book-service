@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: book-service
+  namespace: book-service
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      run: book-service
+  template:
+    metadata:
+      labels:
+        run: book-service
+    spec:
+      containers:
+        - image: harbor.lab.winterfell.live/book-service/book-service
+          name: book-service

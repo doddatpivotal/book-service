@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: book-service
+  namespace: book-service
+spec:
+  rules:
+    - host: book-service.ingress.riverrun.pks.lab.winterfell.live
+      http:
+        paths:
+          - backend:
+              serviceName: book-service
+              servicePort: 80
