@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Concourse ###
+ci/values.yaml
