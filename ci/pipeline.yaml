@@ -11,8 +11,9 @@ resources:
     source:
       uri: ((git-uri))
       branch: ((git-branch))
-#      username: ((git-username))
-#      password: ((git-password))
+      ignore_paths:
+        - "ci"
+        - "docs"
   - name: notify
     type: slack-alert
     icon: slack
