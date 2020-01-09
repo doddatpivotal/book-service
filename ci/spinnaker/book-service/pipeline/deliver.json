@@ -70,7 +70,7 @@
    "moniker": {
     "app": "book-service"
    },
-   "name": "Deploy (Manifest)",
+   "name": "Deploy to Test",
    "refId": "1",
    "requiredArtifactIds": [
     "1ffaacdf-4b92-4168-93f1-1e3b3222ca81"
@@ -91,6 +91,104 @@
     }
    },
    "type": "deployManifest"
+  },
+  {
+   "failPipeline": true,
+   "instructions": "What Next?",
+   "judgmentInputs": [
+    {
+     "value": "Promote to Prod"
+    },
+    {
+     "value": "Rollback"
+    }
+   ],
+   "name": "What Next?",
+   "notifications": [],
+   "refId": "2",
+   "requisiteStageRefIds": [
+    "1"
+   ],
+   "type": "manualJudgment"
+  },
+  {
+   "name": "Check Preconditions",
+   "preconditions": [
+    {
+     "context": {
+      "expression": "${#judgment(\"What Next?\") == 'Promote to Prod'}"
+     },
+     "failPipeline": false,
+     "type": "expression"
+    }
+   ],
+   "refId": "3",
+   "requisiteStageRefIds": [
+    "2"
+   ],
+   "type": "checkPreconditions"
+  },
+  {
+   "account": "casterlyrock",
+   "cloudProvider": "kubernetes",
+   "manifests": [
+    {
+     "apiVersion": "extensions/v1beta1",
+     "kind": "Deployment",
+     "metadata": {
+      "name": "book-service",
+      "namespace": "book-service"
+     },
+     "spec": {
+      "progressDeadlineSeconds": 600,
+      "replicas": 1,
+      "revisionHistoryLimit": 10,
+      "selector": {
+       "matchLabels": {
+        "run": "book-service"
+       }
+      },
+      "template": {
+       "metadata": {
+        "labels": {
+         "run": "book-service"
+        }
+       },
+       "spec": {
+        "containers": [
+         {
+          "image": "harbor.lab.winterfell.live/book-service/book-service",
+          "name": "book-service"
+         }
+        ]
+       }
+      }
+     }
+    }
+   ],
+   "moniker": {
+    "app": "book-service"
+   },
+   "name": "Deploy to Prod",
+   "namespaceOverride": "",
+   "refId": "4",
+   "requiredArtifactIds": [
+    "1ffaacdf-4b92-4168-93f1-1e3b3222ca81"
+   ],
+   "requiredArtifacts": [],
+   "requisiteStageRefIds": [
+    "3"
+   ],
+   "skipExpressionEvaluation": false,
+   "source": "text",
+   "trafficManagement": {
+    "enabled": false,
+    "options": {
+     "enableTraffic": false,
+     "services": []
+    }
+   },
+   "type": "deployManifest"
   }
  ],
  "triggers": [
@@ -106,5 +204,5 @@
    "type": "docker"
   }
  ],
- "updateTs": "1578505743000"
+ "updateTs": "1578521564000"
 }

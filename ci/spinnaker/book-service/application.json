@@ -1,5 +1,5 @@
 {
- "accounts": "riverrun",
+ "accounts": "casterlyrock,riverrun",
  "cloudProviders": "kubernetes",
  "createTs": "1566645330255",
  "dataSources": {
