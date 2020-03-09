@@ -27,3 +27,9 @@ build-password: CHANGEME
 build-target: https://pbs.lab.winterfell.live
 slack-channel: dpfeffer-ci
 ```
+
+## Pack CNB Build
+
+```bash
+pack build book-service --builder cloudfoundry/cnb:cflinuxfs3
+```
