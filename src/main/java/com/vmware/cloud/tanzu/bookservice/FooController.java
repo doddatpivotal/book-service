@@ -8,6 +8,6 @@ public class FooController {
 
     @GetMapping("/version")
     Long getVersion() {
-        return 5L;
+        return 6L;
     }
 }
